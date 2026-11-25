@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>[YOUR NAME] - CSI205TC Network Analysis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="kicker">CSI205TC &middot; Networking and Distributed Computing</p>
+      <h1>Network analysis of a GitHub Pages site</h1>
+      <p class="lead">A small field report on DNS resolution, round-trip latency,
+        the route to the edge, and the protocols behind one HTTPS request.
+        Built for Question 2 of Coursework 1.</p>
+      <a class="button" href="#analysis">Jump to the analysis</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="about" class="card">
+      <h2>About this page</h2>
+      <p>This site is deployed with <strong>GitHub Pages</strong>. The page is
+        intentionally static: one HTML file, one stylesheet and one small
+        script. That keeps the attack surface small and makes the network
+        behaviour easy to observe in developer tools.</p>
+      <ul class="facts">
+        <li><span>Domain</span> [YOUR-USERNAME].github.io</li>
+        <li><span>Hosted by</span> GitHub Pages (edge network)</li>
+        <li><span>Transport</span> TCP &rarr; TLS &rarr; HTTP/2 or HTTP/1.1</li>
+        <li><span>Runtime</span> no server-side code</li>
+      </ul>
+    </section>
+
+    <section id="analysis" class="card">
+      <h2>Measurements</h2>
+      <p>The table below is filled from the commands captured in the report.
+        Values depend on the network you run them from, so re-run them rather
+        than copying these numbers.</p>
+      <table>
+        <thead><tr><th>Measurement</th><th>Command</th><th>Observed</th></tr></thead>
+        <tbody>
+          <tr><td>Resolved addresses</td><td><code>nslookup [YOUR-USERNAME].github.io</code></td><td>[PASTE A RECORDS]</td></tr>
+          <tr><td>Round-trip time</td><td><code>ping [YOUR-USERNAME].github.io</code></td><td>[PASTE MIN/AVG/MAX AND LOSS]</td></tr>
+          <tr><td>Route</td><td><code>tracert [YOUR-USERNAME].github.io</code></td><td>[PASTE HOP COUNT AND NOTABLE HOPS]</td></tr>
+          <tr><td>Response headers</td><td>Developer Tools &rarr; Network</td><td>[PASTE STATUS AND CONTENT-TYPE]</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="protocol" class="grid">
+      <article class="card">
+        <h3>DNS first</h3>
+        <p>Before any bytes of this page arrive, the resolver turns the name
+          into an IPv4 address. GitHub Pages publishes several A records so
+          the client can reach different edge locations.</p>
+      </article>
+      <article class="card">
+        <h3>Then TCP and TLS</h3>
+        <p>The browser opens a TCP connection to port 443, performs the TLS
+          handshake and only then sends an HTTP request. A packet capture
+          shows this as DNS, then SYN / SYN-ACK / ACK, then the handshake.</p>
+      </article>
+      <article class="card">
+        <h3>Why HTTPS matters</h3>
+        <p>Plain HTTP would expose the request and response on the wire.
+          TLS gives confidentiality and integrity, and the HSTS header tells
+          the browser to keep using HTTPS on later visits.</p>
+      </article>
+    </section>
+
+    <section id="log" class="card">
+      <h2>README for the marker</h2>
+      <p>The source files for this question are in <code>Question2/</code> of
+        the submitted ZIP. Screenshots of the ping, nslookup, traceroute and
+        Wireshark results are embedded in the PDF report next to the
+        interpretation of each result.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>CSI205TC Coursework 1 &middot; Question 2 &middot; [YOUR NAME] [STUDENT ID]</p>
+    <p id="clock">Page loaded.</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

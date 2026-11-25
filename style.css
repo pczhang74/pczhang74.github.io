@@ -1,0 +1,87 @@
+/* Minimal stylesheet for the CSI205TC Q2 GitHub Pages site.
+   Mobile first, no external assets, so the page loads from a single origin
+   and the network trace stays easy to read. */
+
+:root {
+  --ink: #17202a;
+  --muted: #5b6770;
+  --paper: #f7f8fa;
+  --card: #ffffff;
+  --accent: #1f5f8b;
+  --accent-soft: #e8f1f8;
+  --line: #dde4ea;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+}
+
+.hero {
+  background: linear-gradient(135deg, #12324d, #1f5f8b);
+  color: #fff;
+  padding: 4.5rem 1.25rem 3.5rem;
+}
+
+.hero-inner { max-width: 860px; margin: 0 auto; }
+
+.kicker {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+h1 { margin: 0 0 1rem; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; }
+.lead { max-width: 42rem; font-size: 1.1rem; opacity: 0.92; }
+
+.button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.65rem 1.15rem;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 6px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.button:hover { background: rgba(255,255,255,0.12); }
+
+main { max-width: 860px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+h2 { margin-top: 0; font-size: 1.45rem; }
+h3 { margin-top: 0; font-size: 1.1rem; color: var(--accent); }
+
+.facts { list-style: none; padding: 0; margin: 1rem 0 0; }
+.facts li { padding: 0.4rem 0; border-bottom: 1px solid var(--line); }
+.facts span { display: inline-block; min-width: 9rem; color: var(--muted); }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; }
+code { background: var(--accent-soft); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+
+.grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 720px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1.5rem 1.25rem 2.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
